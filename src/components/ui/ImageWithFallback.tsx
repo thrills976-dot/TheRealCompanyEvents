@@ -11,7 +11,11 @@ export function ImageWithFallback({ src, fallbackSrc, alt, ...props }: ImageWith
     <img
       src={hasError ? fallbackSrc : src}
       alt={alt}
-      onError={() => setHasError(true)}
+      onError={(e) => {
+        if (!hasError) {
+          setHasError(true);
+        }
+      }}
       {...props}
     />
   );
