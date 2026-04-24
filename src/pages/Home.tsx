@@ -85,33 +85,44 @@ export function Home() {
               {
                 title: "Weddings",
                 desc: "Stress-free elegance. From luxurious staging to bespoke floral arrangements, we craft the perfect day.",
-                icon: <Sparkles className="w-6 h-6 text-gold-400" />
+                icon: <Sparkles className="w-6 h-6 text-gold-400" />,
+                image: "/images/home-portfolio-wedding.jpg"
               },
               {
                 title: "Corporate Events",
                 desc: "Professional setups for galas, conferences, and end-of-year parties that elevate your brand.",
-                icon: <CalendarDays className="w-6 h-6 text-gold-400" />
+                icon: <CalendarDays className="w-6 h-6 text-gold-400" />,
+                image: "/images/home-portfolio-corporate.jpg"
               },
               {
                 title: "Private Parties",
                 desc: "Milestone birthdays, exclusive dinners, and intimate celebrations designed with unparalleled style.",
-                icon: <GlassWater className="w-6 h-6 text-gold-400" />
+                icon: <GlassWater className="w-6 h-6 text-gold-400" />,
+                image: "/images/service-private.jpg"
               },
               {
                 title: "Décor & Styling",
                 desc: "Transform any venue. We provide premium furniture, drapery, and atmospheric lighting.",
-                icon: <Star className="w-6 h-6 text-gold-400" />
+                icon: <Star className="w-6 h-6 text-gold-400" />,
+                image: "/images/home-portfolio-decor.jpg"
               }
             ].map((service, idx) => (
-              <div key={idx} className="bg-[#0f0f0f] p-8 border border-white/5 hover:border-gold-400/50 transition-colors group rounded-md">
-                <div className="w-12 h-12 bg-white/5 flex items-center justify-center rounded-full mb-6 group-hover:bg-gold-400/10 transition-colors">
-                  {service.icon}
+              <div key={idx} className="relative border border-white/5 hover:border-gold-400/50 transition-colors group rounded-md overflow-hidden min-h-[320px] flex flex-col justify-end p-8">
+                <div className="absolute inset-0 z-0">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                 </div>
-                <h3 className="text-xl font-serif font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed mb-6">{service.desc}</p>
-                <Link to="/services" className="text-gold-400 hover:text-gold-300 text-sm font-medium flex items-center transition-colors">
-                  Learn more <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
+                <div className="relative z-10 mt-auto">
+                  <div className="w-12 h-12 bg-black/40 backdrop-blur-sm border border-white/10 flex items-center justify-center rounded-full mb-6 group-hover:bg-gold-400/20 group-hover:border-gold-400/50 transition-colors">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-serif font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-white/80 text-sm leading-relaxed mb-6 font-light">{service.desc}</p>
+                  <Link to="/services" className="text-gold-400 hover:text-gold-300 text-sm font-medium flex items-center transition-colors">
+                    Learn more <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
