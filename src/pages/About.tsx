@@ -1,4 +1,5 @@
 import { CheckCircle } from "lucide-react";
+import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
 export function About() {
   return (
@@ -6,8 +7,9 @@ export function About() {
       {/* Hero Header */}
       <section className="bg-[#0f0f0f] text-white py-24 md:py-32 relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 opacity-20">
-          <img 
+          <ImageWithFallback 
             src="/images/about-hero.jpg" 
+            fallbackSrc="https://images.unsplash.com/photo-1542665952614-51e9e6f3aa57?q=80&w=2070&auto=format&fit=crop"
             alt="Event details" 
             className="w-full h-full object-cover"
           />
@@ -30,15 +32,17 @@ export function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1 relative">
               <div className="aspect-[3/4] overflow-hidden bg-[#0f0f0f] border border-white/5 rounded-md">
-                <img 
+                <ImageWithFallback 
                   src="/images/about-main.jpg" 
+                  fallbackSrc="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"
                   alt="Elegant event setup" 
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-8 -right-8 w-64 h-64 border-8 border-[#0a0a0a] overflow-hidden hidden md:block shadow-2xl rounded-md">
-                <img 
+                <ImageWithFallback 
                   src="/images/about-detail.jpg" 
+                  fallbackSrc="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop"
                   alt="Floral detail" 
                   className="w-full h-full object-cover"
                 />

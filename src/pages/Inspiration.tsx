@@ -1,6 +1,7 @@
 import { useInspiration } from "../contexts/InspirationContext";
 import { Trash2, MessageCircle, HeartCrack } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
 export function Inspiration() {
   const { items, toggleItem, clearBoard } = useInspiration();
@@ -60,7 +61,12 @@ export function Inspiration() {
                 {items.map(item => (
                   <div key={item.id} className="group relative aspect-square overflow-hidden bg-white/5 rounded-md border border-white/10">
                     {item.image && (
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-80" />
+                      <ImageWithFallback 
+                        src={item.image} 
+                        fallbackSrc="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"
+                        alt={item.title} 
+                        className="w-full h-full object-cover opacity-80" 
+                      />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/20"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-6">

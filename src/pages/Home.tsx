@@ -1,5 +1,6 @@
 import { ArrowRight, Star, CheckCircle, CalendarDays, GlassWater, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
 export function Home() {
   return (
@@ -7,8 +8,9 @@ export function Home() {
       {/* Hero Section */}
       <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0">
-          <img 
+          <ImageWithFallback 
             src="/images/home-hero.jpg" 
+            fallbackSrc="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
             alt="Elegant event setup" 
             className="w-full h-full object-cover"
           />
@@ -109,7 +111,12 @@ export function Home() {
             ].map((service, idx) => (
               <div key={idx} className="relative border border-white/5 hover:border-gold-400/50 transition-colors group rounded-md overflow-hidden min-h-[320px] flex flex-col justify-end p-8">
                 <div className="absolute inset-0 z-0">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <ImageWithFallback
+                    src={service.image} 
+                    fallbackSrc={service.image.includes('wedding') ? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' : 
+                                 service.image.includes('corporate') ? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop' :
+                                 service.image.includes('decor') ? 'https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1530103862676-de809de59d9b?q=80&w=2070&auto=format&fit=crop'}
+                    alt={service.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500"></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                 </div>
@@ -144,7 +151,10 @@ export function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div className="group relative h-[400px] overflow-hidden rounded-sm">
-              <img src="/images/home-portfolio-wedding.jpg" alt="Wedding reception tables" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <ImageWithFallback 
+                src="/images/home-portfolio-wedding.jpg" 
+                fallbackSrc="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"
+                alt="Wedding reception tables" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-neutral-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                 <span className="text-gold-400 text-xs font-semibold uppercase tracking-wider">Wedding</span>
@@ -152,7 +162,10 @@ export function Home() {
               </div>
             </div>
             <div className="group relative h-[400px] overflow-hidden">
-              <img src="/images/home-portfolio-corporate.jpg" alt="Corporate event hall" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <ImageWithFallback 
+                src="/images/home-portfolio-corporate.jpg" 
+                fallbackSrc="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop"
+                alt="Corporate event hall" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-neutral-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                 <span className="text-gold-400 text-xs font-semibold uppercase tracking-wider">Corporate</span>
@@ -160,7 +173,10 @@ export function Home() {
               </div>
             </div>
             <div className="group relative h-[400px] overflow-hidden">
-              <img src="/images/home-portfolio-decor.jpg" alt="Decor details" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <ImageWithFallback 
+                src="/images/home-portfolio-decor.jpg" 
+                fallbackSrc="https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop"
+                alt="Decor details" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 via-neutral-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                 <span className="text-gold-400 text-xs font-semibold uppercase tracking-wider">Décor</span>
@@ -203,7 +219,10 @@ export function Home() {
             </div>
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden rounded-md border border-white/5">
-                <img src="/images/home-why-us.jpg" alt="Event planning details" className="w-full h-full object-cover" />
+                <ImageWithFallback 
+                  src="/images/home-why-us.jpg" 
+                  fallbackSrc="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop"
+                  alt="Event planning details" className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-[#0f0f0f] border border-white/10 p-8 hidden md:block max-w-xs shadow-2xl rounded-md">
                 <p className="text-white/90 font-serif text-xl italic font-light leading-snug">

@@ -1,6 +1,7 @@
 import { Check, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useInspiration } from "../contexts/InspirationContext";
+import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
 export function Services() {
   const { toggleItem, isInBoard } = useInspiration();
@@ -85,7 +86,12 @@ export function Services() {
               <div key={service.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
                 <div className={`relative ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
                   <div className="aspect-[4/3] overflow-hidden bg-[#0f0f0f] border border-white/5 rounded-md">
-                    <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                    <ImageWithFallback 
+                      src={service.image} 
+                      fallbackSrc={service.image.includes('wedding') ? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' : 
+                                   service.image.includes('corporate') ? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop' :
+                                   service.image.includes('decor') ? 'https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1530103862676-de809de59d9b?q=80&w=2070&auto=format&fit=crop'}
+                      alt={service.title} className="w-full h-full object-cover" />
                   </div>
                 </div>
                 

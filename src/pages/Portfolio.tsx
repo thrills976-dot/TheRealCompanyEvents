@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { useInspiration } from "../contexts/InspirationContext";
+import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
 export function Portfolio() {
   const [filter, setFilter] = useState("all");
@@ -111,8 +112,11 @@ export function Portfolio() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredItems.map((item) => (
               <div key={item.id} className="group relative aspect-square overflow-hidden bg-neutral-100 cursor-pointer">
-                <img 
+                <ImageWithFallback 
                   src={item.image} 
+                  fallbackSrc={item.category === 'wedding' ? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' : 
+                               item.category === 'corporate' ? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop' :
+                               item.category === 'decor' ? 'https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1530103862676-de809de59d9b?q=80&w=2070&auto=format&fit=crop'}
                   alt={item.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
