@@ -4,39 +4,31 @@ interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc: string;
 }
 
+const transparentPixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
 export function ImageWithFallback({ src, fallbackSrc, alt, ...props }: ImageWithFallbackProps) {
-  const [currentSrc, setCurrentSrc] = useState<string>(src || fallbackSrc);
+  const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
-    if (!src) {
-      setCurrentSrc(fallbackSrc);
-      return;
-    }
-
-    let mounted = true;
-    const img = new Image();
-
-    img.onload = () => {
-      if (mounted) setCurrentSrc(src);
-    };
-
-    img.onerror = () => {
-      if (mounted) setCurrentSrc(fallbackSrc);
-    };
-
-    // Setting src triggers the load/error checks
-    img.src = src;
-
-    return () => {
-      mounted = false;
-    };
+    setErrorCount(0);
   }, [src, fallbackSrc]);
+
+  let currentSrc = src;
+  if (errorCount === 1) {
+    currentSrc = fallbackSrc;
+  } else if (errorCount >= 2) {
+    currentSrc = transparentPixel;
+  }
 
   return (
     <img
       src={currentSrc}
       alt={alt}
+      onError={() => {
+        setErrorCount((prev) => prev + 1);
+      }}
       {...props}
     />
   );
 }
+
