@@ -19,7 +19,7 @@ export function ImageWithFallback({ src, fallbackSrc, alt, ...props }: ImageWith
 
   let currentSrc = src;
   if (currentSrc && currentSrc.startsWith('/') && !currentSrc.startsWith('//')) {
-    const base = import.meta.env.BASE_URL || '/';
+    const base = (import.meta as any).env?.BASE_URL || '/';
     currentSrc = `${base}${currentSrc.slice(1)}`;
   }
 

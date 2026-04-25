@@ -67,6 +67,7 @@ export function Services() {
     {
       id: "accommodation",
       title: "Luxury Accommodation",
+      price: "$60.00 - $65.00",
       images: [
         "/images/service-accommodation-1.jpg",
         "/images/service-accommodation-2.jpg",
@@ -84,6 +85,7 @@ export function Services() {
     {
       id: "staffing",
       title: "Event Staffing & Nurse Aides",
+      price: "$30.00",
       images: [
         "/images/service-staff-1.jpg",
         "/images/service-staff-2.jpg"
@@ -142,7 +144,13 @@ export function Services() {
                 </div>
                 
                 <div className={`${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">{service.title}</h2>
+                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">{service.title}</h2>
+                  {service.price && (
+                    <div className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-6">
+                      {service.price}
+                    </div>
+                  )}
+                  {!service.price && <div className="mb-6"></div>}
                   <p className="text-lg text-white/70 mb-8 leading-relaxed font-light">
                     {service.description}
                   </p>
