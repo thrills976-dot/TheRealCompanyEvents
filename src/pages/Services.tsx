@@ -63,6 +63,39 @@ export function Services() {
         "Delivery, setup & breakdown services"
       ],
       outcome: "Elevated event aesthetics using clean, modern, and pristine equipment."
+    },
+    {
+      id: "accommodation",
+      title: "Luxury Accommodation",
+      images: [
+        "/images/service-accommodation-1.jpg",
+        "/images/service-accommodation-2.jpg",
+        "/images/service-accommodation-3.jpg"
+      ],
+      description: "Comfortable and fully-equipped accommodation for your guests. We provide premium lodging options ensuring everyone stays comfortable before, during, and after your event.",
+      includes: [
+        "Fully furnished guest rooms",
+        "All essential amenities included",
+        "Comfortable bedding & linens",
+        "Clean, modern facilities"
+      ],
+      outcome: "A restful and premium stay for your guests with absolute convenience."
+    },
+    {
+      id: "staffing",
+      title: "Event Staffing & Nurse Aides",
+      images: [
+        "/images/service-staff-1.jpg",
+        "/images/service-staff-2.jpg"
+      ],
+      description: "Professional, reliable, and highly-trained personnel to ensure your event runs smoothly. We handle everything from food service to guest wellness and assistance.",
+      includes: [
+        "Professional waiters & waitresses",
+        "Qualified nurse aides for health and mobility assistance",
+        "Event coordinators & hosts",
+        "Setup and breakdown crews"
+      ],
+      outcome: "A seamlessly executed event with exceptional hospitality and guest care."
     }
   ];
 
@@ -85,14 +118,27 @@ export function Services() {
             {services.map((service, index) => (
               <div key={service.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
                 <div className={`relative ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                  <div className="aspect-[4/3] overflow-hidden bg-[#0f0f0f] border border-white/5 rounded-md">
-                    <ImageWithFallback 
-                      src={service.image} 
-                      fallbackSrc={service.image.includes('wedding') ? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' : 
-                                   service.image.includes('corporate') ? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop' :
-                                   service.image.includes('decor') ? 'https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1530103862676-de809de59d9b?q=80&w=2070&auto=format&fit=crop'}
-                      alt={service.title} className="w-full h-full object-cover" />
-                  </div>
+                  {service.images ? (
+                    <div className="grid grid-cols-2 gap-4">
+                      {service.images.map((img, i) => (
+                        <div key={i} className={`overflow-hidden bg-[#0f0f0f] border border-white/5 rounded-md ${service.images && service.images.length === 3 && i === 2 ? 'col-span-2 aspect-[21/9]' : 'aspect-[3/4]'}`}>
+                          <ImageWithFallback 
+                            src={img} 
+                            fallbackSrc="https://images.unsplash.com/photo-1542665952614-51e9e6f3aa57?q=80&w=2070&auto=format&fit=crop"
+                            alt={`${service.title} - Image ${i + 1}`} className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="aspect-[4/3] overflow-hidden bg-[#0f0f0f] border border-white/5 rounded-md">
+                      <ImageWithFallback 
+                        src={service.image} 
+                        fallbackSrc={service.image?.includes('wedding') ? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop' : 
+                                     service.image?.includes('corporate') ? 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop' :
+                                     service.image?.includes('decor') ? 'https://images.unsplash.com/photo-1522413452208-9969062f148b?q=80&w=2070&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1530103862676-de809de59d9b?q=80&w=2070&auto=format&fit=crop'}
+                        alt={service.title} className="w-full h-full object-cover" />
+                    </div>
+                  )}
                 </div>
                 
                 <div className={`${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
@@ -132,7 +178,7 @@ export function Services() {
                         id: `service-${service.id}`,
                         title: service.title,
                         type: 'service',
-                        image: service.image
+                        image: service.image || (service.images && service.images[0]) || ''
                       })}
                       className={`inline-flex items-center justify-center border px-6 py-4 rounded-md transition-colors uppercase tracking-widest text-xs font-bold ${
                         isInBoard(`service-${service.id}`) 

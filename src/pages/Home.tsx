@@ -1,4 +1,4 @@
-import { ArrowRight, Star, CheckCircle, CalendarDays, GlassWater, Sparkles } from "lucide-react";
+import { ArrowRight, Star, CheckCircle, CalendarDays, GlassWater, Sparkles, Home as HomeIcon, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ImageWithFallback } from "../components/ui/ImageWithFallback";
 
@@ -81,7 +81,7 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "Weddings",
@@ -106,6 +106,18 @@ export function Home() {
                 desc: "Transform any venue. We provide premium furniture, drapery, and atmospheric lighting.",
                 icon: <Star className="w-6 h-6 text-gold-400" />,
                 image: "/images/home-portfolio-decor.jpg"
+              },
+              {
+                title: "Accommodation",
+                desc: "Comfortable, fully-equipped accommodation blocks with all essential amenities for your guests.",
+                icon: <HomeIcon className="w-6 h-6 text-gold-400" />,
+                image: "/images/service-accommodation-1.jpg"
+              },
+              {
+                title: "Staffing & Nurse Aides",
+                desc: "Professional waiters, waitresses, and qualified nurse aides to ensure your event runs smoothly.",
+                icon: <Users className="w-6 h-6 text-gold-400" />,
+                image: "/images/service-staff-1.jpg"
               }
             ].map((service, idx) => (
               <div key={idx} className="relative border border-white/5 hover:border-gold-400/50 transition-colors group rounded-md overflow-hidden min-h-[320px] flex flex-col justify-end p-8">

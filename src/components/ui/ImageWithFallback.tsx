@@ -1,7 +1,11 @@
-import { useState, useEffect, ImgHTMLAttributes } from 'react';
+import React, { useState, useEffect } from 'react';
 
-interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement> {
-  fallbackSrc: string;
+interface ImageWithFallbackProps {
+  fallbackSrc?: string;
+  src?: string;
+  alt?: string;
+  className?: string;
+  [key: string]: any; // Allow other standard image attributes
 }
 
 const transparentPixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -14,9 +18,14 @@ export function ImageWithFallback({ src, fallbackSrc, alt, ...props }: ImageWith
   }, [src, fallbackSrc]);
 
   let currentSrc = src;
-  if (errorCount === 1) {
+  if (currentSrc && currentSrc.startsWith('/') && !currentSrc.startsWith('//')) {
+    const base = import.meta.env.BASE_URL || '/';
+    currentSrc = `${base}${currentSrc.slice(1)}`;
+  }
+
+  if (errorCount === 1 && fallbackSrc) {
     currentSrc = fallbackSrc;
-  } else if (errorCount >= 2) {
+  } else if (errorCount >= 2 || (errorCount === 1 && !fallbackSrc)) {
     currentSrc = transparentPixel;
   }
 
